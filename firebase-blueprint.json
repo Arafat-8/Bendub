@@ -1,0 +1,118 @@
+
+{
+  "entities": {
+    "Category": {
+      "title": "Category",
+      "type": "object",
+      "description": "Represents a classification or genre for videos.",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "name"]
+    },
+    "Video": {
+      "title": "Video",
+      "type": "object",
+      "description": "Represents a single video entry.",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "link": { "type": "string", "format": "uri" },
+        "thumbnail": { "type": "string", "format": "uri" },
+        "category": { "type": "string" },
+        "season": { "type": "number", "description": "Subcategory: Season 1-4" },
+        "synopsis": { "type": "string" },
+        "views": { "type": "number" },
+        "subtitleUrl": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "title", "link", "thumbnail", "category"]
+    },
+    "InviteLink": {
+      "title": "InviteLink",
+      "type": "object",
+      "description": "A secure invite code for private access.",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "createdBy": { "type": "string" },
+        "expiryDate": { "type": "number" },
+        "usageLimit": { "type": "number" },
+        "usedCount": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "code", "createdBy"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "type": "object",
+      "description": "Extended user data and roles.",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "moderator", "user"] },
+        "deviceCount": { "type": "number" },
+        "lastLogin": { "type": "number" },
+        "invitedBy": { "type": "string" }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "WatchHistory": {
+      "title": "WatchHistory",
+      "type": "object",
+      "description": "Record of user video progress.",
+      "properties": {
+        "userId": { "type": "string" },
+        "videoId": { "type": "string" },
+        "progressSeconds": { "type": "number" },
+        "durationSeconds": { "type": "number" },
+        "lastWatched": { "type": "number" }
+      }
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "type": "object",
+      "description": "Global system configuration.",
+      "properties": {
+        "adminMasterKey": { "type": "string" },
+        "googleDriveApiKey": { "type": "string" },
+        "deviceLimitEnabled": { "type": "boolean" },
+        "maxDevices": { "type": "number" }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["password"]
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/backend/entities/Category" },
+      "description": "Video genres."
+    },
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/backend/entities/Video" },
+      "description": "The video library entries."
+    },
+    "/invites/{inviteId}": {
+      "schema": { "$ref": "#/backend/entities/InviteLink" },
+      "description": "Access codes."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/backend/entities/UserProfile" },
+      "description": "Authorized member profiles."
+    },
+    "/users/{userId}/history/{videoId}": {
+      "schema": { "$ref": "#/backend/entities/WatchHistory" },
+      "description": "User playback progress."
+    },
+    "/settings/config": {
+      "schema": { "$ref": "#/backend/entities/SystemSettings" },
+      "description": "Global config."
+    }
+  }
+}

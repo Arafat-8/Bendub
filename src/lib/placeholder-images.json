@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "Tech landscape",
+      "imageUrl": "https://picsum.photos/seed/tech/600/400",
+      "imageHint": "technology abstract"
+    },
+    {
+      "id": "2",
+      "description": "Nature beauty",
+      "imageUrl": "https://picsum.photos/seed/nature/600/400",
+      "imageHint": "nature landscape"
+    },
+    {
+      "id": "3",
+      "description": "Urban architecture",
+      "imageUrl": "https://picsum.photos/seed/urban/600/400",
+      "imageHint": "city architecture"
+    },
+    {
+      "id": "4",
+      "description": "Minimal workspace",
+      "imageUrl": "https://picsum.photos/seed/minimal/600/400",
+      "imageHint": "minimalist workspace"
+    }
+  ]
+}
